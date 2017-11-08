@@ -7,28 +7,28 @@
 public class CalendarioBasico
 {
     // Declarando campos di
-    private int day;
-    private int month;
-    private int year;
+    private DisplayDosCaracteres day;
+    private DisplayDosCaracteres month;
+    private DisplayDosCaracteres year;
 
     /**
      * Constructor para calendario basico.
      */
     public CalendarioBasico()
     {
-        day = 1;
-        month = 1;
-        year = 1;
+        day = new DisplayDosCaracteres(31);
+        month = new DisplayDosCaracteres(13);
+        year = new DisplayDosCaracteres(2100);
     }
-    
+
     /**
      * Permite introducir el dia, mes y año de una fecha.
      */
     public void fijarFecha(int dia, int mes, int ano)
     {
-        day = dia;
-        month = mes;
-        year = ano;
+        day.setValorAlmacenado(dia);
+        month.setValorAlmacenado(mes);
+        year.setValorAlmacenado(ano);
     }
 
     /**
@@ -36,37 +36,21 @@ public class CalendarioBasico
      */
     public void avanzarFecha()
     {
-        if (day < 31){
-            day = day + 1;
-        }
-        if (day == 31){
-            day = 1;
-            month = month + 1;
-        }
-        if (month == 13){
-            month = 1;
-            year = year + 1;
+        day.incrementaValorAlmacenado();
+        if (day.getValorAlmacenado() == 1) {
+            month.incrementaValorAlmacenado();
+            if (month.getValorAlmacenado() == 1) {
+                year.incrementaValorAlmacenado();
+            }
         }
     }
-    
+
     /**
      * Permite devolver una fecha.
      */
     public String obtenerFecha()
     {
-        String dosCifrDia = String.valueOf(day);
-        String dosCifrMes = String.valueOf(month);
-        String dosCifrAno = String.valueOf(year);
-        if (dosCifrDia.length() < 2) {
-            dosCifrDia = "0" + String.valueOf(day);
-        }
-        if (dosCifrMes.length() < 2) {
-            dosCifrMes = "0" + String.valueOf(month);
-        }
-        if (dosCifrAno.length() < 2) {
-            dosCifrAno = "0" + String.valueOf(year);
-        }
-        return dosCifrDia + "-" + dosCifrMes + "-" + dosCifrAno;
+        return day.getTextoDelDisplay() + "-" + month.getTextoDelDisplay() + "-" + year.getTextoDelDisplay();
     }
-       
+
 }
