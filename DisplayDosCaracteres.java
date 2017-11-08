@@ -14,6 +14,7 @@ public class DisplayDosCaracteres
     // El valor actual que almacena el display
     private int valorAlmacenado;
 
+
     /**
      * Constructor de la clase DisplayDosCaracteres
      *
